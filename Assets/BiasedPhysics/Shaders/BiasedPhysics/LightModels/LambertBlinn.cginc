@@ -25,16 +25,16 @@ half4 LightingBiasedPhysics_LambertBlinn(SurfaceOutput surface, half3 lightDir, 
     return half4(lightColor * surfaceColor, surface.Alpha);
 }
 
-half4 BiasedPhysics_LambertBlinn_IBL(SurfaceOutput surface, half3 worldNormal, half3 worldReflection) {
+half3 BiasedPhysics_LambertBlinn_IBL(SurfaceOutput surface, half3 worldNormal, half3 worldReflection) {
     float fresnel = Fresnel(worldReflection, worldNormal) * surface.Gloss;
     
-    float3 specular = _SpecColor * BlinnIBL(worldReflection, surface.Specular, _GlobalConvolutedEnvironment, _GlobalConvolutedEnvironmentMipmapCount);
+    half3 specular = _SpecColor * BlinnIBL(worldReflection, surface.Specular, _GlobalConvolutedEnvironment, _GlobalConvolutedEnvironmentMipmapCount);
     specular *= fresnel;
 
-    float3 diffuse = surface.Albedo * LambertIBL(worldNormal, _GlobalConvolutedEnvironment, _GlobalConvolutedEnvironmentMipmapCount);
+    half3 diffuse = surface.Albedo * LambertIBL(worldNormal, _GlobalConvolutedEnvironment, _GlobalConvolutedEnvironmentMipmapCount);
     diffuse *= (1.0f - _SpecColor * fresnel);
     
-    return half4(diffuse + specular, 1.0f);
+    return diffuse + specular;
 }
 
 half3 BiasedPhysics_LambertBlinn_SampledIBL(SurfaceOutput surface, half3 worldViewDir, half3 worldNormal, sampler2D encodedSamples, int sampleCount) {

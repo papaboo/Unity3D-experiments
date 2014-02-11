@@ -12,10 +12,13 @@ samplerCUBE _GlobalEnvironment;
 sampler2D _GlobalConvolutedEnvironment;
 float _GlobalConvolutedEnvironmentMipmapCount;
 
+float _Roughness; // For all OrenNayar lightmodels
+
 #include "Assets/BiasedPhysics/Shaders/BiasedPhysics/LightModels/Blinn.cginc"
 #include "Assets/BiasedPhysics/Shaders/BiasedPhysics/LightModels/FunkyBlinn.cginc"
 #include "Assets/BiasedPhysics/Shaders/BiasedPhysics/LightModels/LambertBlinn.cginc"
 #include "Assets/BiasedPhysics/Shaders/BiasedPhysics/LightModels/Lambert.cginc"
 #include "Assets/BiasedPhysics/Shaders/BiasedPhysics/LightModels/OrenNayar.cginc"
+#include "Assets/BiasedPhysics/Shaders/BiasedPhysics/LightModels/OrenNayarBlinn.cginc"
 
 #endif // _BIASED_PHYSICS_LIGHTING_H_

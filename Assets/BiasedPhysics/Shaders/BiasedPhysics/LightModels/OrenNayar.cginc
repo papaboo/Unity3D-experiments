@@ -10,8 +10,6 @@
 
 #include "Assets/BiasedPhysics/Shaders/BiasedPhysics/BxDFs/OrenNayar.cginc"
 
-float _Roughness;
-
 half4 LightingBiasedPhysics_OrenNayar(SurfaceOutput surface, half3 lightDir, half3 viewDir, half atten) {
     half3 diffuse = surface.Albedo * OrenNayarEvaluate(viewDir, lightDir, surface.Normal, _Roughness);
 
