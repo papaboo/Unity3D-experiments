@@ -47,9 +47,9 @@ float PowerCosineDistribution_PDF(float3 wHalf, float3 wNorm, float exponent) {
 }
 
 DistributionSample PowerCosineDistribution_Sample(float2 sampleUV, float exponent) {
-    float phi = 2.0f * PI * sampleUV.x;
-    float cosTheta = pow(sampleUV.y, 1.0f / (exponent + 1.0f));
+    float cosTheta = pow(sampleUV.x, 1.0f / (exponent + 1.0f));
     float sinTheta = sqrt(1.0f - cosTheta * cosTheta);
+    float phi = 2.0f * PI * sampleUV.y;
     
     DistributionSample distSample;
     distSample.Direction = float3(cos(phi) * sinTheta, cosTheta, sin(phi) * sinTheta);
