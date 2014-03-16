@@ -56,7 +56,7 @@ BlinnSample SampleBlinn(float2 sampleUV, float3 view, float3 normal, float3 tang
     BlinnSample bxdfSample;
     if (distSample.PDF > 0.00001f) {
         float3 halfway = tangent * distSample.Direction.x + normal * distSample.Direction.y + bitangent * distSample.Direction.z;
-        bxdfSample.Direction = -normalize(reflect(view, halfway));
+        bxdfSample.Direction = -reflect(view, halfway);
 
         if (dot(bxdfSample.Direction, normal) < 0.0f) {
             bxdfSample.PDF = 0.0f;
