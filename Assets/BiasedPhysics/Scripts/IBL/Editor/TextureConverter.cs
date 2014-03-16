@@ -74,8 +74,9 @@ public static class TextureConverter {
         AssetDatabase.CreateAsset(cube, "Assets/PhysicallyBiased/TestCubemapDirections.cubemap");
         Debug.Log("Generated /PhysicallyBiased/TestCubemapDirections.cubemap");
     }
+    */
 
-    [MenuItem("Biased/Test/Generate LatLong")]
+    [MenuItem("Biased/Test/LatLong Test Image")]
     public static void GenerateTestLatLong() {
         Texture2D latlong = new Texture2D(256, 128, TextureFormat.RGB24, true);
         latlong.wrapMode = TextureWrapMode.Clamp;
@@ -84,17 +85,17 @@ public static class TextureConverter {
             float phi = ((u + 0.5f) / (float) latlong.width) * 2.0f * Mathf.PI;
             for (int v = 0; v < latlong.height; ++v) {
                 float theta = (1.0f - (v + 0.5f) / (float) latlong.height) * Mathf.PI;
-                Vector3 dir = CubemapUtils.SphericalToDirection(theta, phi);
+                Vector3 dir = Utils.Cubemap.SphericalToDirection(theta, phi);
 
-                latlong.SetPixel(u, v, FaceToColor(CubemapUtils.GetCubemapFace(dir)));
+                latlong.SetPixel(u, v, FaceToColor(Utils.Cubemap.GetCubemapFace(dir)));
             }
         }
         latlong.Apply(); // Not really needed, but lets make sure
         
-        string texPath = Application.dataPath + "/PhysicallyBiased/TestLatLong.png";
+        string texPath = Application.dataPath + "/BiasedPhysics/Textures/Environments/TestLatLong.png";
         System.IO.File.WriteAllBytes(texPath, latlong.EncodeToPNG());
         AssetDatabase.Refresh();
-        Debug.Log("Generated /PhysicallyBiased/TestLatLong.png");
+        Debug.Log("Generated " + texPath);
     }
 
     public static Color FaceToColor(CubemapFace face) {
@@ -114,5 +115,4 @@ public static class TextureConverter {
         }
         return new Color(0,0,0); // Shaddap compiler
     }
-    */
 }
