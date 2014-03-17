@@ -25,15 +25,9 @@ half3 BiasedPhysics_Blinn_SampledIBL(SurfaceOutput surface, half3 worldViewDir, 
     CreateTangents(worldNormal, tangent, bitangent);
 
     float3 iblColor = float3(0.0f);
-    // float totalPDF = 0.0f; // TODO Divide by the average PDF to try and get a summed PDF of 1? Might remove some of the energy loss that we see at low roughness values, which looks really great
     for (int i = 0; i < sampleCount; ++i) {
         half2 sampleUV = DecodeRandomUV(tex2D(encodedSamples, float2(i * invTotalSampleCount, 0.5f)));
-        BlinnSample bxdfSample = SampleBlinn(sampleUV, worldViewDir, worldNormal, tangent, bitangent, surface.Specular);
-        if (bxdfSample.PDF > 0.0f) {
-            half3 L = texCUBElod(_GlobalEnvironment, float4(bxdfSample.Direction, 0.0f)).rgb;
-            iblColor += L * (dot(bxdfSample.Direction, worldNormal) * bxdfSample.Weight / bxdfSample.PDF);
-            // totalPDF += bxdfSample.PDF;
-        }
+        iblColor += SampleBlinnIBL(sampleUV, worldViewDir, worldNormal, tangent, bitangent, surface.Specular, _GlobalEnvironment);
     }
     
     return surface.Albedo * iblColor / sampleCount;
