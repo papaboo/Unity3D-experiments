@@ -10,6 +10,10 @@
 
 #include "Assets/BiasedPhysics/Shaders/BiasedPhysics/BxDFs/OrenNayar.cginc"
 #include "Assets/BiasedPhysics/Shaders/BiasedPhysics/BxDFs/Blinn.cginc"
+#include "Assets/BiasedPhysics/Shaders/BiasedPhysics/LightModels/Globals.cginc"
+#include "Assets/BiasedPhysics/Shaders/BiasedPhysics/Utils/Fresnel.cginc"
+
+float _Roughness; // Roughness of the base surface.
 
 half4 LightingBiasedPhysics_OrenNayarBlinn(SurfaceOutput surface, half3 lightDir, half3 viewDir, half atten) {
     half fresnel = Fresnel(viewDir, surface.Normal) * surface.Gloss;

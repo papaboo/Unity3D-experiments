@@ -15,7 +15,7 @@
 		CGPROGRAM
         #define UE4_FRESNEL
 
-        #include "BiasedPhysicsLighting.cginc"
+        #include "Assets/BiasedPhysics/Shaders/BiasedPhysics/LightModels/OrenNayarBlinn.cginc"
 
 	    #pragma target 3.0
 	    #pragma glsl

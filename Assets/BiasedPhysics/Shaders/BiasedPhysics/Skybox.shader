@@ -37,6 +37,7 @@ SubShader {
 		fixed4 frag (v2f i) : COLOR {
             return texCUBE (_GlobalEnvironment, i.texcoord);
 		}
+
 		ENDCG 
 	}
 } 	

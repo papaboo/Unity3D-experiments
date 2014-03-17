@@ -41,18 +41,22 @@ BxDFSample SampleOrenNayer(float2 sampleUV, float3 view, float3 normal, float3 t
     
     // Return direction in .xyz and weight/PDF in .w
     BxDFSample bxdfSample;
-    bxdfSample.Direction = tangent * distSample.Direction.x + normal * distSample.Direction.y + bitangent * distSample.Direction.z;
-    if (distSample.PDF > 0.00001f)
-        bxdfSample.WeightOverPDF = OrenNayarEvaluate(view, bxdfSample.Direction, normal, roughness) / distSample.PDF;
-    else
-        bxdfSample.WeightOverPDF = 0.0f;
+    if (distSample.PDF > 0.00001f) {
+        bxdfSample.Direction = tangent * distSample.Direction.x + normal * distSample.Direction.y + bitangent * distSample.Direction.z;
+        bxdfSample.Weight = OrenNayarEvaluate(view, bxdfSample.Direction, normal, roughness);
+        bxdfSample.PDF = distSample.PDF;
+    } else
+        bxdfSample.PDF = 0.0f;
     return bxdfSample;
 }
 
 half3 SampleOrenNayerIBL(float2 sampleUV, float3 view, float3 normal, float3 tangent, float3 bitangent, float roughness, samplerCUBE ibl) {
     BxDFSample bxdfSample = SampleOrenNayer(sampleUV, view, normal, tangent, bitangent, roughness);
-    half3 L = texCUBElod(ibl, float4(bxdfSample.Direction, 0.0f)).rgb;
-    return L * (dot(bxdfSample.Direction, normal) * bxdfSample.WeightOverPDF);
+    if (bxdfSample.PDF > 0.0f) {
+        half3 L = texCUBElod(ibl, float4(bxdfSample.Direction, 0.0f)).rgb;
+        return L * (dot(bxdfSample.Direction, normal) * bxdfSample.Weight / bxdfSample.PDF);
+    } else
+        return half3(0.0f);
 }
 
 float3 OrenNayarIBL(float3 normal, float roughness, sampler2D environmentMap, float environmentMapMipmaps) {

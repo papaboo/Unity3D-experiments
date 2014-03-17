@@ -6,10 +6,10 @@
 	}
 	SubShader {
 		Tags { "RenderType"="Opaque" }
-		LOD 400
+		LOD 300
 		
 		CGPROGRAM
-        #include "BiasedPhysicsLighting.cginc"
+        #include "Assets/BiasedPhysics/Shaders/BiasedPhysics/LightModels/Lambert.cginc"
 
 	    #pragma target 3.0
 	    #pragma glsl

@@ -4,14 +4,15 @@ Shader "BiasedPhysics/Sampled/Blinn" {
 		_MainTex ("Base (RGB)", 2D) = "white" {}
         _Shininess ("Shininess", Range (0.0, 1.0)) = 0.3
         _BumpMap ("Normalmap", 2D) = "bump" {}
-        _EncodedSamples ("Encoded random samples (must contain minimum 2048 samples)", 2D) = "white" {}
+        _SamplesDrawn ("Samples drawn", Float) = 64
+        _EncodedSamples ("Encoded random samples (must contain a multiple of 2048 samples)", 2D) = "white" {}
 	}
 	SubShader {
 		Tags { "RenderType"="Opaque" }
 		LOD 500
 
 		CGPROGRAM
-        #include "Assets/BiasedPhysics/Shaders/BiasedPhysics/BiasedPhysicsLighting.cginc"
+        #include "Assets/BiasedPhysics/Shaders/BiasedPhysics/LightModels/Blinn.cginc"
 
 	    #pragma target 3.0
 	    #pragma glsl
@@ -21,6 +22,7 @@ Shader "BiasedPhysics/Sampled/Blinn" {
         half _Shininess;
 		sampler2D _MainTex;
         sampler2D _BumpMap;
+        half _SamplesDrawn;
         sampler2D _EncodedSamples;
 
 		struct Input {
@@ -46,7 +48,7 @@ Shader "BiasedPhysics/Sampled/Blinn" {
             // Apply IBL
             surface.Normal = normalize(float3(0,0,3) + UnpackNormal(tex2D(_BumpMap, IN.uv_BumpMap))); // Unpacks to tangent space (so basically N*2.0-1.0)
             float3 bumpedWorlNormal = WorldNormalVector(IN, surface.Normal); // Requires worldNormal and INTERNAL_DATA as Input members
-            surface.Emission = BiasedPhysics_Blinn_SampledIBL(surface, normalize(IN.worldViewDir), normalize(bumpedWorlNormal), 64, _EncodedSamples, 1.0f / 2048);
+            surface.Emission = BiasedPhysics_Blinn_SampledIBL(surface, normalize(IN.worldViewDir), normalize(bumpedWorlNormal), _SamplesDrawn, _EncodedSamples, 1.0f / 2048);
 		}
 
 		ENDCG

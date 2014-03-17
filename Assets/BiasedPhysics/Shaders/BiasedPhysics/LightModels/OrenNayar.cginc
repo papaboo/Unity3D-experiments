@@ -9,6 +9,9 @@
 #define _BIASED_PHYSICS_LIGHTMODEL_OREN_NAYAR_H_
 
 #include "Assets/BiasedPhysics/Shaders/BiasedPhysics/BxDFs/OrenNayar.cginc"
+#include "Assets/BiasedPhysics/Shaders/BiasedPhysics/LightModels/Globals.cginc"
+
+float _Roughness; // Roughness of the surface.
 
 half4 LightingBiasedPhysics_OrenNayar(SurfaceOutput surface, half3 lightDir, half3 viewDir, half atten) {
     half3 diffuse = surface.Albedo * OrenNayarEvaluate(viewDir, lightDir, surface.Normal, _Roughness);

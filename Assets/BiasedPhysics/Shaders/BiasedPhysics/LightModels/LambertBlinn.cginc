@@ -7,6 +7,7 @@
 
 #include "Assets/BiasedPhysics/Shaders/BiasedPhysics/BxDFs/Blinn.cginc"
 #include "Assets/BiasedPhysics/Shaders/BiasedPhysics/BxDFs/Lambert.cginc"
+#include "Assets/BiasedPhysics/Shaders/BiasedPhysics/LightModels/Globals.cginc"
 #include "Assets/BiasedPhysics/Shaders/BiasedPhysics/Utils/Fresnel.cginc"
 
 half4 LightingBiasedPhysics_LambertBlinn(SurfaceOutput surface, half3 lightDir, half3 viewDir, half atten) {
@@ -47,6 +48,7 @@ half3 BiasedPhysics_LambertBlinn_SampledIBL(SurfaceOutput surface, half3 worldVi
     for (int i = 0; i < sampleCount; ++i) {
         float2 sampleUV = DecodeRandomUV(tex2D(encodedSamples, float2(i * INV_TOTAL_SAMPLE_COUNT, 0.5f)));
 
+        // TODO Try out different ways of combining the samples here (Check if the sampling from PBRT really is sound)
         base += SampleLambertIBL(sampleUV, worldNormal, tangent, bitangent, _GlobalEnvironment);        
         // coat = SampleBlinnIBL(sampleUV, worldViewDir, worldNormal, tangent, bitangent, surface.Specular, _GlobalEnvironment);
     }

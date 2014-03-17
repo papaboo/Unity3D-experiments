@@ -8,10 +8,10 @@
 	}
 	SubShader {
 		Tags { "RenderType"="Opaque" }
-		LOD 500
+		LOD 400
 
 		CGPROGRAM
-        #include "Assets/BiasedPhysics/Shaders/BiasedPhysics/BiasedPhysicsLighting.cginc"
+        #include "Assets/BiasedPhysics/Shaders/BiasedPhysics/LightModels/OrenNayar.cginc"
 
 	    #pragma target 3.0
 	    #pragma glsl

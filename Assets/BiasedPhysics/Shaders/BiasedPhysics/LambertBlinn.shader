@@ -14,7 +14,7 @@
 		CGPROGRAM
         #define SCHLICK_FRESNEL
 
-        #include "BiasedPhysicsLighting.cginc"
+        #include "Assets/BiasedPhysics/Shaders/BiasedPhysics/LightModels/LambertBlinn.cginc"
 
 	    #pragma target 3.0
 	    #pragma glsl

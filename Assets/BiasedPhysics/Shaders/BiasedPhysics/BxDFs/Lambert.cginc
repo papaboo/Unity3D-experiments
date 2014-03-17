@@ -28,16 +28,17 @@ BxDFSample SampleLambert(float2 sampleUV, float3 normal, float3 tangent, float3 
     BxDFSample bxdfSample;
     if (distSample.PDF > 0.0001f) {
         bxdfSample.Direction = tangent * distSample.Direction.x + normal * distSample.Direction.y + bitangent * distSample.Direction.z;
-        bxdfSample.WeightOverPDF = EvaluateLambert() / distSample.PDF;
+        bxdfSample.Weight = EvaluateLambert();
+        bxdfSample.PDF = distSample.PDF;
     } else
-        bxdfSample.WeightOverPDF = 0.0f;
+        bxdfSample.PDF = 0.0f;
         
     return bxdfSample;
 }
 
 half3 SampleLambertIBL(float2 sampleUV, float3 normal, float3 tangent, float3 bitangent, samplerCUBE ibl) {
     BxDFSample bxdfSample = SampleLambert(sampleUV, normal, tangent, bitangent);
-    if (bxdfSample.WeightOverPDF > 0.00001f)
+    if (bxdfSample.PDF > 0.0f)
         // Multiplying the weight, cos(Light) and 1/PDF cancels out, so we can simplify to just the environment lookup
         // return texCUBElod(_GlobalEnvironment, float4(bxdfSample.Direction, 0.0f)).rgb * bxdfSample.Weight * dot(bxdfSample.Direction, worldNormal) / bxdfSample.PDF;
         return texCUBElod(ibl, float4(bxdfSample.Direction, 0.0f)).rgb;

@@ -42,18 +42,12 @@ float BlinnEvaluate(float3 wIn, float3 wOut, float3 wNorm, float specularity) {
     return (f * d * g) / (4.0f * dot(wIn, wNorm) * dot(wOut, wNorm));
 }
 
-struct BlinnSample {
-    float3 Direction;
-    float Weight;
-    float PDF;
-};
-
-BlinnSample SampleBlinn(float2 sampleUV, float3 view, float3 normal, float3 tangent, float3 bitangent, float specularity) {
+BxDFSample SampleBlinn(float2 sampleUV, float3 view, float3 normal, float3 tangent, float3 bitangent, float specularity) {
     float shininess = BlinnShininess(specularity);
 
     DistributionSample distSample = PowerCosineDistribution_Sample(sampleUV, shininess);
     
-    BlinnSample bxdfSample;
+    BxDFSample bxdfSample;
     if (distSample.PDF > 0.00001f) {
         float3 halfway = tangent * distSample.Direction.x + normal * distSample.Direction.y + bitangent * distSample.Direction.z;
         bxdfSample.Direction = -reflect(view, halfway);
@@ -71,7 +65,7 @@ BlinnSample SampleBlinn(float2 sampleUV, float3 view, float3 normal, float3 tang
 }
 
 half3 SampleBlinnIBL(float2 sampleUV, float3 view, float3 normal, float3 tangent, float3 bitangent, float specularity, samplerCUBE ibl) {
-    BlinnSample bxdfSample = SampleBlinn(sampleUV, view, normal, tangent, bitangent, specularity);
+    BxDFSample bxdfSample = SampleBlinn(sampleUV, view, normal, tangent, bitangent, specularity);
     if (bxdfSample.PDF > 0.0f) {
         half3 L = texCUBElod(ibl, float4(bxdfSample.Direction, 0.0f)).rgb;
         return L * (dot(bxdfSample.Direction, normal) * bxdfSample.Weight / bxdfSample.PDF);
