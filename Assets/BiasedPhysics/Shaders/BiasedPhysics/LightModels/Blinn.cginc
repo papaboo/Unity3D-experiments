@@ -17,8 +17,13 @@ half4 LightingBiasedPhysics_Blinn(SurfaceOutput surface, half3 lightDir, half3 v
     return half4(lightColor * surfaceColor, surface.Alpha);
 }
 
-half3 BiasedPhysics_Blinn_IBL(SurfaceOutput surface, half3 worldNormal, half3 worlReflection) {
-    return surface.Albedo * BlinnIBL(worlReflection, surface.Specular, _GlobalConvolutedEnvironment, _GlobalConvolutedEnvironmentMipmapCount);
+half3 BiasedPhysics_Blinn_IBL(SurfaceOutput surface, half3 worldViewDir, half3 worldNormal) {
+    float3 reflection = -reflect(worldViewDir, worldNormal);
+    return surface.Albedo * BlinnIBL(reflection, surface.Specular, _GlobalConvolutedEnvironment, _GlobalConvolutedEnvironmentMipmapCount);
+}
+
+half3 BiasedPhysics_Blinn_IBL(SurfaceOutput surface, half3 worldViewDir, half3 worldNormal, sampler2D rhomap) {
+    return surface.Albedo * BlinnIBL(surface.Specular, worldViewDir, worldNormal, rhomap, _GlobalConvolutedEnvironment, _GlobalConvolutedEnvironmentMipmapCount);
 }
 
 half3 BiasedPhysics_Blinn_SampledIBL(SurfaceOutput surface, half3 worldViewDir, half3 worldNormal, int samplesDrawn, sampler2D encodedSamples, float invTotalSampleCount) {
@@ -29,6 +34,10 @@ half3 BiasedPhysics_Blinn_SampledIBL(SurfaceOutput surface, half3 worldViewDir, 
     for (int i = 0; i < samplesDrawn; ++i) {
         half2 sampleUV = DecodeRandomUV(tex2D(encodedSamples, float2(i * invTotalSampleCount, 0.5f)));
         iblColor += SampleBlinnIBL(sampleUV, worldViewDir, worldNormal, tangent, bitangent, surface.Specular, _GlobalEnvironment);
+        
+        /* BxDFSample bxdfSample = SampleBlinn(sampleUV, worldViewDir, worldNormal, tangent, bitangent, surface.Specular); */
+        /* if (bxdfSample.PDF > 0.0f) */
+        /*     iblColor += float3(dot(bxdfSample.Direction, worldNormal) * bxdfSample.Weight / bxdfSample.PDF); */
     }
     
     return surface.Albedo * iblColor / samplesDrawn;

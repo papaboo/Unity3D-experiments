@@ -4,7 +4,8 @@
 		_MainTex ("Base (RGB)", 2D) = "white" {}
         _Roughness ("Roughness", Range (0.0, 1.0)) = 0.3
         _BumpMap ("Normalmap", 2D) = "bump" {}
-        _EncodedSamples ("Encoded random samples", 2D) = "white" {}
+        _SamplesDrawn ("Samples drawn", Float) = 64
+        _EncodedSamples ("Encoded random samples (must contain a multiple of 2048 samples)", 2D) = "white" {}
 	}
 	SubShader {
 		Tags { "RenderType"="Opaque" }
@@ -20,6 +21,7 @@
         fixed4 _Color;
 		sampler2D _MainTex;
         sampler2D _BumpMap;
+        half _SamplesDrawn;
         sampler2D _EncodedSamples;
 
 		struct Input {
@@ -43,7 +45,7 @@
             // Apply IBL
             surface.Normal = normalize(float3(0,0,3) + UnpackNormal(tex2D(_BumpMap, IN.uv_BumpMap))); // Unpacks to tangent space (so basically N*2.0-1.0)
             float3 bumpedWorlNormal = WorldNormalVector(IN, surface.Normal); // Requires worldNormal and INTERNAL_DATA as Input members
-            surface.Emission = BiasedPhysics_OrenNayar_SampledIBL(surface, normalize(IN.worldViewDir), normalize(bumpedWorlNormal), _EncodedSamples, 256);
+            surface.Emission = BiasedPhysics_OrenNayar_SampledIBL(surface, normalize(IN.worldViewDir), normalize(bumpedWorlNormal), _SamplesDrawn, _EncodedSamples);
 		}
 
 		ENDCG

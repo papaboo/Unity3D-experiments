@@ -1,5 +1,9 @@
 fileFormatVersion: 2
 guid: 4a3eaf9a8e5754a03bd157ad44f2a4bb
 ShaderImporter:
-  defaultTextures: []
+  defaultTextures:
+  - _MainTex: {instanceID: 0}
+  - _BumpMap: {instanceID: 0}
+  - _OrenNayarRhoMap: {fileID: 2800000, guid: 067ca2d430d314594a017bae1ec13507, type: 3}
+  - _BlinnRhoMap: {fileID: 2800000, guid: a4cd6106edaf04f908f177a00fa93239, type: 3}
   userData: 

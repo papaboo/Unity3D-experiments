@@ -4,6 +4,7 @@
 		_MainTex ("Base (RGB)", 2D) = "white" {}
         _Roughness ("Roughness", Range (0.0, 1.0)) = 0.3
         _BumpMap ("Normalmap", 2D) = "bump" {}
+        _RhoMap ("Rhomap (Hemispherical-Bidirectional distribution map)", 2D) = "white" {}
 	}
 	SubShader {
 		Tags { "RenderType"="Opaque" }
@@ -19,6 +20,7 @@
         fixed4 _Color;
 		sampler2D _MainTex;
         sampler2D _BumpMap;
+        sampler2D _RhoMap;
 
 		struct Input {
 			float2 uv_MainTex;
@@ -39,9 +41,9 @@
             surface.Alpha = 1.0f;
 
             // Apply IBL
-            surface.Normal = normalize(float3(0,0,3) + UnpackNormal(tex2D(_BumpMap, IN.uv_BumpMap))); // Unpacks to tangent space (so basically N*2.0-1.0)
+            surface.Normal = normalize(UnpackNormal(tex2D(_BumpMap, IN.uv_BumpMap))); // Unpacks to tangent space (so basically N*2.0-1.0)
             float3 bumpedWorlNormal = WorldNormalVector(IN, surface.Normal); // Requires worldNormal and INTERNAL_DATA as Input members
-            surface.Emission = BiasedPhysics_OrenNayar_IBL(surface, normalize(bumpedWorlNormal)); // Useless normalize?
+            surface.Emission = BiasedPhysics_OrenNayar_IBL(surface, normalize(IN.worldViewDir), bumpedWorlNormal, _RhoMap);
 		}
 
 		ENDCG

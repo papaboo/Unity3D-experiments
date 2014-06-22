@@ -20,7 +20,8 @@ public static class Convoluter {
 
     public static void ConvoluteLatLong(Texture2D inputMap) {
     
-        Texture2D convoluted = new Texture2D(inputMap.width, inputMap.height, TextureFormat.RGBA32, true);
+        Texture2D convoluted = new Texture2D(inputMap.width, inputMap.height, TextureFormat.RGB24, true);
+        convoluted.filterMode = FilterMode.Trilinear;
         convoluted.name = inputMap.name + "_Convoluted";
 
         convoluted.SetPixels(inputMap.GetPixels());
@@ -109,12 +110,16 @@ public static class Convoluter {
             pixelsProcessed += mipWidth * mipHeight;
         }
 
+        EditorUtility.DisplayProgressBar("Convoluting lat long skybox", "Saving " + inputMap.name, 0.99f);
+
         convoluted.Apply(false, true);
-            
+
         string sourcePath = AssetDatabase.GetAssetPath(inputMap);
         string saveFolder = System.IO.Path.GetDirectoryName(sourcePath);
         string destPath = saveFolder +"/" + convoluted.name + ".asset";
         AssetDatabase.CreateAsset(convoluted, destPath);
+
+        Texture2D.DestroyImmediate(convoluted);
 
         EditorUtility.ClearProgressBar();
 

@@ -43,4 +43,16 @@ half3 BiasedPhysics_OrenNayarBlinn_IBL(SurfaceOutput surface, half3 worldNormal,
     return base + coat;
 }
 
+half3 BiasedPhysics_OrenNayarBlinn_IBL(SurfaceOutput surface, half3 worldViewDir, half3 worldNormal, sampler2D orenNayarRhomap, sampler2D blinnRhomap) {
+    float fresnel = Fresnel(worldViewDir, worldNormal) * surface.Gloss;
+
+    half3 coat = _SpecColor * BlinnIBL(surface.Specular, worldViewDir, worldNormal, blinnRhomap, _GlobalConvolutedEnvironment, _GlobalConvolutedEnvironmentMipmapCount);
+    coat *= fresnel;
+
+    half3 base = surface.Albedo * OrenNayarIBL(_Roughness, worldViewDir, worldNormal, orenNayarRhomap, _GlobalConvolutedEnvironment, _GlobalConvolutedEnvironmentMipmapCount);
+    base *= (1.0f - _SpecColor * fresnel);
+    
+    return base + coat;
+}
+
 #endif // _BIASED_PHYSICS_LIGHTMODEL_OREN_NAYAR_BLINN_H_

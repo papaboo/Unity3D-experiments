@@ -2,7 +2,7 @@ Shader "BiasedPhysics/Sampled/FunkyBlinn" {
 	Properties {
         _Color ("Main Color", Color) = (1,1,1,1)
 		_MainTex ("Base (RGB)", 2D) = "white" {}
-        _Shininess ("Shininess", Range (0.0, 1.0)) = 0.3
+        _Shininess ("Specularity", Range (0.0, 1.0)) = 0.3
         _Fresnel_bias_scale_exponent ("Schlick fresnel bias, scale and exponent", Vector) = (0.06, 0.94, 5, 0)
         _BumpMap ("Normalmap", 2D) = "bump" {}
         _SamplesDrawn ("Samples drawn", Float) = 64
@@ -23,7 +23,7 @@ Shader "BiasedPhysics/Sampled/FunkyBlinn" {
         #pragma surface surf BiasedPhysics_Blinn vertex:vert
 
         fixed4 _Color;
-        half _Shininess;
+        half _Shininess; // Called shininess for compatibility with Unity shaders.
 		sampler2D _MainTex;
         sampler2D _BumpMap;
         sampler2D _EncodedSamples;
@@ -45,11 +45,11 @@ Shader "BiasedPhysics/Sampled/FunkyBlinn" {
 		void surf(Input IN, inout SurfaceOutput surface) {
             fixed4 tex = tex2D(_MainTex, IN.uv_MainTex);
             surface.Albedo = tex.rgb * _Color.rgb;
-            surface.Alpha = 1.0f; //tex.a * _Color.a;
+            surface.Alpha = 1.0f; // tex.a * _Color.a;
             surface.Gloss = tex.a;
             surface.Specular = _Shininess;
 
-            surface.Normal = normalize(float3(0,0,3) + UnpackNormal(tex2D(_BumpMap, IN.uv_BumpMap))); // Unpacks to tangent space (so basically N*2.0-1.0)
+            surface.Normal = normalize(UnpackNormal(tex2D(_BumpMap, IN.uv_BumpMap))); // Unpacks to tangent space (so basically N*2.0-1.0)
             float3 bumpedWorlNormal = normalize(WorldNormalVector(IN, surface.Normal)); // Requires worldNormal and INTERNAL_DATA as Input members
             float3 worldViewDir = normalize(IN.worldViewDir);
 

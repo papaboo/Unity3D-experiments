@@ -1,5 +1,8 @@
 fileFormatVersion: 2
 guid: 1e7d4171d1b854409bf1a3eeb3592804
 ShaderImporter:
-  defaultTextures: []
+  defaultTextures:
+  - _MainTex: {instanceID: 0}
+  - _BumpMap: {instanceID: 0}
+  - _RhoMap: {fileID: 2800000, guid: a4cd6106edaf04f908f177a00fa93239, type: 3}
   userData: 

@@ -2,7 +2,7 @@ Shader "BiasedPhysics/Sampled/Blinn" {
 	Properties {
         _Color ("Main Color", Color) = (1,1,1,1)
 		_MainTex ("Base (RGB)", 2D) = "white" {}
-        _Shininess ("Shininess", Range (0.0, 1.0)) = 0.3
+        _Shininess ("Specularity", Range (0.0, 1.0)) = 0.3
         _BumpMap ("Normalmap", 2D) = "bump" {}
         _SamplesDrawn ("Samples drawn", Float) = 64
         _EncodedSamples ("Encoded random samples (must contain a multiple of 2048 samples)", 2D) = "white" {}
@@ -19,7 +19,7 @@ Shader "BiasedPhysics/Sampled/Blinn" {
         #pragma surface surf BiasedPhysics_Blinn vertex:vert
 
         fixed4 _Color;
-        half _Shininess;
+        half _Shininess; // Called shininess for compatibility with Unity shaders.
 		sampler2D _MainTex;
         sampler2D _BumpMap;
         half _SamplesDrawn;

@@ -21,22 +21,22 @@ float OrenNayarEvaluate(float3 view, float3 light, float3 normal, float roughnes
     float B = 0.45f * roughnessSqrd / (roughnessSqrd + 0.09f);
 
     // Theta and phi
-    float2 cos_theta = saturate(float2(dot(normal, light), dot(normal, view)));
-    float2 cos_theta2 = cos_theta * cos_theta;
-    float sin_theta = sqrt((1.0f - cos_theta2.x) * (1.0f - cos_theta2.y));
-    float3 light_plane = normalize(light - cos_theta.x * normal);
-    float3 view_plane = normalize(view - cos_theta.y * normal);
-    float cos_phi = saturate(dot(light_plane, view_plane));
+    float2 cosTheta = saturate(float2(dot(normal, light), dot(normal, view)));
+    float2 cosTheta2 = cosTheta * cosTheta;
+    float sinTheta = sqrt((1.0f - cosTheta2.x) * (1.0f - cosTheta2.y));
+    float3 lightPlane = normalize(light - cosTheta.x * normal);
+    float3 viewPlane = normalize(view - cosTheta.y * normal);
+    float cosPhi = saturate(dot(lightPlane, viewPlane));
 
     // Composition
-    return (A + B * cos_phi * sin_theta / max(cos_theta.x, cos_theta.y)) / PI;
+    return (A + B * cosPhi * sinTheta / max(cosTheta.x, cosTheta.y)) / PI;
 }
 
 float OrenNayarSpecularity(float roughness) {
     return roughness * 0.1f;
 }
 
-BxDFSample SampleOrenNayer(float2 sampleUV, float3 view, float3 normal, float3 tangent, float3 bitangent, float roughness) {
+BxDFSample SampleOrenNayar(float2 sampleUV, float3 view, float3 normal, float3 tangent, float3 bitangent, float roughness) {
     DistributionSample distSample = CosineDistribution_Sample(sampleUV);
     
     // Return direction in .xyz and weight/PDF in .w
@@ -50,8 +50,8 @@ BxDFSample SampleOrenNayer(float2 sampleUV, float3 view, float3 normal, float3 t
     return bxdfSample;
 }
 
-half3 SampleOrenNayerIBL(float2 sampleUV, float3 view, float3 normal, float3 tangent, float3 bitangent, float roughness, samplerCUBE ibl) {
-    BxDFSample bxdfSample = SampleOrenNayer(sampleUV, view, normal, tangent, bitangent, roughness);
+half3 SampleOrenNayarIBL(float2 sampleUV, float3 view, float3 normal, float3 tangent, float3 bitangent, float roughness, samplerCUBE ibl) {
+    BxDFSample bxdfSample = SampleOrenNayar(sampleUV, view, normal, tangent, bitangent, roughness);
     if (bxdfSample.PDF > 0.0f) {
         half3 L = texCUBElod(ibl, float4(bxdfSample.Direction, 0.0f)).rgb;
         return L * (dot(bxdfSample.Direction, normal) * bxdfSample.Weight / bxdfSample.PDF);
@@ -59,13 +59,22 @@ half3 SampleOrenNayerIBL(float2 sampleUV, float3 view, float3 normal, float3 tan
         return half3(0.0f);
 }
 
-float3 OrenNayarIBL(float3 normal, float roughness, sampler2D environmentMap, float environmentMapMipmaps) {
+float3 OrenNayarIBL(float3 normal, float roughness, sampler2D environmentMap, float environmentMapMipmapCount) {
     float2 uv = Utils_LatLong_DirectionToSphericalUV(normal);
 
     // Compute glossy miplevel bias from exponent
-    float glossyBias = (1.0f - OrenNayarSpecularity(roughness)) * (environmentMapMipmaps-1.0f);
+    float glossyBias = (1.0f - OrenNayarSpecularity(roughness)) * (environmentMapMipmapCount-1.0f);
     
     return tex2Dlod(environmentMap, float4(uv, 0.0f, glossyBias)).rgb;
 }
+
+float3 OrenNayarIBL(float roughness, half3 viewDir, half3 normal, 
+                    sampler2D rhomap, sampler2D environmentMap, float environmentMapMipmapCount) {
+    float u = dot(viewDir, normal);
+    float rho = tex2D(rhomap, float2(u, roughness)).r;
+    float3 lookupDirection = normal;
+    return rho * OrenNayarIBL(lookupDirection, roughness, environmentMap, environmentMapMipmapCount);
+}
+
 
 #endif // _BIASED_PHYSICS_OREN_NAYAR_BRDF_H_

@@ -24,7 +24,6 @@ float LambertSpecularity() {
 BxDFSample SampleLambert(float2 sampleUV, float3 normal, float3 tangent, float3 bitangent) {
     DistributionSample distSample = CosineDistribution_Sample(sampleUV);
     
-    // Return direction in .xyz and weight/PDF in .w
     BxDFSample bxdfSample;
     if (distSample.PDF > 0.0001f) {
         bxdfSample.Direction = tangent * distSample.Direction.x + normal * distSample.Direction.y + bitangent * distSample.Direction.z;
@@ -46,16 +45,16 @@ half3 SampleLambertIBL(float2 sampleUV, float3 normal, float3 tangent, float3 bi
         return half3(0.0f);
 }
 
-float3 LambertIBL(float3 normal, sampler2D environmentMap, float environmentMapMipmaps) {
+float3 LambertIBL(float3 normal, sampler2D environmentMap, float environmentMapMipmapCount) {
     float2 uv = Utils_LatLong_DirectionToSphericalUV(normal);
 
-    float baseMipmap = environmentMapMipmaps-1.0f;
+    float baseMipmap = environmentMapMipmapCount-1.0f;
     
     return tex2Dlod(environmentMap, float4(uv, 0.0f, baseMipmap)).rgb;
 }
 
-float3 LambertIBL(float3 viewDir, float3 normal, sampler2D environmentMap, float environmentMapMipmaps) {
-    return LambertIBL(normal, environmentMap, environmentMapMipmaps);
+float3 LambertIBL(float3 viewDir, float3 normal, sampler2D environmentMap, float environmentMapMipmapCount) {
+    return LambertIBL(normal, environmentMap, environmentMapMipmapCount);
 }
 
 #endif // _PHYSICALLY_BASED_LAMBERT_BRDF_H_

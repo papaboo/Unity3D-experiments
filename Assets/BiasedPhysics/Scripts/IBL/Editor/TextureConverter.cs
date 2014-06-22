@@ -47,10 +47,9 @@ public static class TextureConverter {
         EditorUtility.ClearProgressBar();
     }
 
-    /*
-    [MenuItem("Biased/Test/Cubemap Direction Calculation")]
-    public static void CubemapDirectionGenerationTest() {
-        int faceSize = 4;
+    [MenuItem("Biased/Test/Directional Cubemap")]
+    public static void DirectionalCubemap() {
+        int faceSize = 8;
         Cubemap cube = new Cubemap(faceSize, TextureFormat.RGB24, false);
         
         // For each side
@@ -60,9 +59,9 @@ public static class TextureConverter {
                 for (int y = 0; y < faceSize; ++y) {
                     
                     int index = x + y * faceSize;
-                    Vector3 dir = CubemapUtils.CubemapDirection(face,
-                                                                (x+0.5f) / (float)faceSize - 0.5f,
-                                                                (y+0.5f) / (float)faceSize - 0.5f);
+                    Vector3 dir = Utils.Cubemap.CubemapDirection(face,
+                                                                 (x+0.5f) / (float)faceSize - 0.5f,
+                                                                 (y+0.5f) / (float)faceSize - 0.5f);
                     
                     pixels[index] = new Color(dir.x, dir.y, dir.z);
                 }
@@ -71,10 +70,29 @@ public static class TextureConverter {
             cube.Apply();
         }
         
-        AssetDatabase.CreateAsset(cube, "Assets/PhysicallyBiased/TestCubemapDirections.cubemap");
-        Debug.Log("Generated /PhysicallyBiased/TestCubemapDirections.cubemap");
+        AssetDatabase.CreateAsset(cube, "Assets/BiasedPhysics/DirectionalCubemap.cubemap");
+        Debug.Log("Generated /BiasedPhysics/DirectionalCubemap.cubemap");
     }
-    */
+
+    [MenuItem("Biased/Test/Cubemap Test Image")]
+    public static void TestCubemap() {
+        int faceSize = 8;
+        Cubemap cube = new Cubemap(faceSize, TextureFormat.RGB24, false);
+        
+        // For each side
+        foreach (CubemapFace face in System.Enum.GetValues(typeof(CubemapFace))) {
+            Color color = FaceToColor(face);
+            Color[] pixels = new Color[faceSize * faceSize];
+            for (int i = 0; i < faceSize * faceSize; ++i)
+                pixels[i] = color;
+
+            cube.SetPixels(pixels, face);
+            cube.Apply();
+        }
+        
+        AssetDatabase.CreateAsset(cube, "Assets/BiasedPhysics/TestCubemap.cubemap");
+        Debug.Log("Generated /BiasedPhysics/TestCubemap.cubemap");
+    }
 
     [MenuItem("Biased/Test/LatLong Test Image")]
     public static void GenerateTestLatLong() {

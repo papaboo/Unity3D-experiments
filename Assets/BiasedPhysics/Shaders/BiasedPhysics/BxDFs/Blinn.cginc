@@ -29,14 +29,14 @@ float BlinnSpecularity(float shininess) {
 
 float Blinn(float3 wHalf, float3 wNorm, float exponent) {
     const float INV_TWO_PI = 1.0f / (2.0f * 3.141592653589793f);
-    float absCosTheta = abs(dot(wHalf, wNorm));
-    float norm = (exponent + 2.0f) * INV_TWO_PI;
-    return norm * pow(absCosTheta, exponent);
+    float cosTheta = max(0.000001f, dot(wHalf, wNorm));
+    float normalization = (exponent + 2.0f) * INV_TWO_PI;
+    return normalization * pow(cosTheta, exponent);
 }   
 
 float BlinnEvaluate(float3 wIn, float3 wOut, float3 wNorm, float specularity) {
     float3 wHalf = normalize(wIn + wOut);
-    float f = 1.0f; // No fresnel
+    float f = 1.0f; // No fresnel, handled in lightmodel.
     float g = CookTorranceGeometric(wIn, wOut, wHalf, wNorm);
     float d = Blinn(wHalf, wNorm, BlinnShininess(specularity));
     return (f * d * g) / (4.0f * dot(wIn, wNorm) * dot(wOut, wNorm));
@@ -73,18 +73,21 @@ half3 SampleBlinnIBL(float2 sampleUV, float3 view, float3 normal, float3 tangent
         return half3(0.0f, 0.0f, 0.0f);
 }
 
-half3 BlinnIBL(float3 wOut, float specularity, sampler2D environmentMap, float environmentMapMipmaps) {
+half3 BlinnIBL(float3 wOut, float specularity, sampler2D environmentMap, float environmentMapMipmapCount) {
     float2 uv = Utils_LatLong_DirectionToSphericalUV(wOut);
 
     // Compute glossy miplevel bias from exponent
-    float glossyBias = (1.0f - specularity) * (environmentMapMipmaps-1.0f);
+    float glossyBias = (1.0f - specularity) * (environmentMapMipmapCount-1.0f);
     
     return tex2Dlod(environmentMap, float4(uv, 0.0f, glossyBias)).rgb;
 }
 
-half3 BlinnIBL(float3 viewDir, float3 normal, float specularity, sampler2D environmentMap, float environmentMapMipmaps) {
-    float3 wOut = reflect(viewDir, normal);
-    return BlinnIBL(wOut, specularity, environmentMap, environmentMapMipmaps);
+half3 BlinnIBL(float specularity, half3 viewDir, half3 normal, 
+               sampler2D rhomap, sampler2D environmentMap, float environmentMapMipmapCount) {
+    float u = dot(viewDir, normal);
+    float rho = tex2D(rhomap, float2(u, specularity)).r;
+    float3 reflection = -reflect(viewDir, normal);
+    return rho * BlinnIBL(reflection, specularity, environmentMap, environmentMapMipmapCount);
 }
 
 #endif // _BIASED_PHYSICS_BXDF_BLINN_BRDF_H_

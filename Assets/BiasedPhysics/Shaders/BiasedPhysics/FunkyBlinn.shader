@@ -2,9 +2,10 @@
 	Properties {
         _Color ("Main Color", Color) = (1,1,1,1)
         _MainTex ("Base (RGB) Gloss (A)", 2D) = "white" {}
-        _Shininess ("Shininess", Range (0.03, 1)) = 0.078125
-        _Fresnel_bias_scale_exponent ("Schlick fresnel bias, scale and exponent", Vector) = (0.06, 0.94, 5, 0)
+        _Shininess ("Specularity", Range (0.0, 1)) = 0.3
         _BumpMap ("Normalmap", 2D) = "bump" {}
+        _Fresnel_bias_scale_exponent ("Schlick fresnel bias, scale and exponent", Vector) = (0.06, 0.94, 5, 0)
+        _RhoMap ("Rhomap (Hemispherical-Bidirectional distribution map)", 2D) = "white" {}
 	}
 	SubShader {
 		Tags { "RenderType"="Opaque" }
@@ -20,10 +21,11 @@
 	    #pragma glsl
         #pragma surface surf BiasedPhysics_Blinn vertex:vert
 
-		sampler2D _MainTex;
-        sampler2D _BumpMap;
         fixed4 _Color;
-        half _Shininess;
+		sampler2D _MainTex;
+        half _Shininess; // Called shininess for compatibility with Unity shaders.
+        sampler2D _BumpMap;
+        sampler2D _RhoMap;
 
 		struct Input {
 			float2 uv_MainTex;
@@ -43,19 +45,20 @@
             surface.Albedo = tex.rgb * _Color.rgb;
             surface.Gloss = tex.a;
             surface.Alpha = 1.0f; //tex.a * _Color.a;
-            surface.Specular = _Shininess;
 
             surface.Normal = normalize(UnpackNormal(tex2D(_BumpMap, IN.uv_BumpMap))); // Unpacks to tangent space (so basically N*2.0-1.0)
-            float3 bumpedWorlNormal = normalize(WorldNormalVector(IN, surface.Normal)); // Requires worldNormal and INTERNAL_DATA as Input members
+            float3 bumpedWorlNormal = WorldNormalVector(IN, surface.Normal); // Requires worldNormal and INTERNAL_DATA as Input members
             float3 worldViewDir = normalize(IN.worldViewDir);
 
             // Modulate specularity by fresnel
             float fresnel = Fresnel(worldViewDir, bumpedWorlNormal) * surface.Gloss;
-            surface.Specular *= fresnel;
+            surface.Specular = sqrt(sqrt(_Shininess)) * fresnel;
             
+            // Lerp albedo towards white by fresnel to 'simulate' total reflection at tangent angles
+            // surface.Albedo = lerp(surface.Albedo, half3(1.0f), fresnel * fresnel);
+
             // Apply IBL
-            float3 bumpedWorlReflection = -reflect(worldViewDir, bumpedWorlNormal);
-            surface.Emission = BiasedPhysics_Blinn_IBL(surface, bumpedWorlNormal, bumpedWorlReflection);
+            surface.Emission = BiasedPhysics_Blinn_IBL(surface, worldViewDir, bumpedWorlNormal, _RhoMap);
 		}
 
 		ENDCG
