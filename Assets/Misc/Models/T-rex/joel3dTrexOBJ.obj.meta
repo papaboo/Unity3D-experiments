@@ -1,0 +1,346 @@
+fileFormatVersion: 2
+guid: 0f411b615911d4738b280a598c6bcdc6
+ModelImporter:
+  serializedVersion: 16
+  fileIDToRecycleName:
+    100000: //RootNode
+    100002: polySurface121_TrexSkeletontoes Trex_Geometry Trex_joel3d
+    100004: Trex_Geometry_Trex_joel3d jaw
+    100006: Trex_Geometry_Trex_joel3d L_Ankle
+    100008: Trex_Geometry_Trex_joel3d L_blade
+    100010: Trex_Geometry_Trex_joel3d L_Hip
+    100012: Trex_Geometry_Trex_joel3d L_Knee
+    100014: Trex_Geometry_Trex_joel3d neck1
+    100016: Trex_Geometry_Trex_joel3d pelvis
+    100018: Trex_Geometry_Trex_joel3d polySurface100
+    100020: Trex_Geometry_Trex_joel3d polySurface101
+    100022: Trex_Geometry_Trex_joel3d polySurface102
+    100024: Trex_Geometry_Trex_joel3d polySurface103
+    100026: Trex_Geometry_Trex_joel3d polySurface104
+    100028: Trex_Geometry_Trex_joel3d polySurface105
+    100030: Trex_Geometry_Trex_joel3d polySurface111
+    100032: Trex_Geometry_Trex_joel3d polySurface112
+    100034: Trex_Geometry_Trex_joel3d polySurface113
+    100036: Trex_Geometry_Trex_joel3d polySurface118
+    100038: Trex_Geometry_Trex_joel3d polySurface119
+    100040: Trex_Geometry_Trex_joel3d polySurface120
+    100042: Trex_Geometry_Trex_joel3d polySurface18
+    100044: Trex_Geometry_Trex_joel3d polySurface181
+    100046: Trex_Geometry_Trex_joel3d polySurface182
+    100048: Trex_Geometry_Trex_joel3d polySurface183
+    100050: Trex_Geometry_Trex_joel3d polySurface184
+    100052: Trex_Geometry_Trex_joel3d polySurface185
+    100054: Trex_Geometry_Trex_joel3d polySurface186
+    100056: Trex_Geometry_Trex_joel3d polySurface187
+    100058: Trex_Geometry_Trex_joel3d polySurface188
+    100060: Trex_Geometry_Trex_joel3d polySurface189
+    100062: Trex_Geometry_Trex_joel3d polySurface190
+    100064: Trex_Geometry_Trex_joel3d polySurface191
+    100066: Trex_Geometry_Trex_joel3d polySurface192
+    100068: Trex_Geometry_Trex_joel3d polySurface193
+    100070: Trex_Geometry_Trex_joel3d polySurface194
+    100072: Trex_Geometry_Trex_joel3d polySurface195
+    100074: Trex_Geometry_Trex_joel3d polySurface196
+    100076: Trex_Geometry_Trex_joel3d polySurface197
+    100078: Trex_Geometry_Trex_joel3d polySurface198
+    100080: Trex_Geometry_Trex_joel3d polySurface89
+    100082: Trex_Geometry_Trex_joel3d polySurface90
+    100084: Trex_Geometry_Trex_joel3d polySurface91
+    100086: Trex_Geometry_Trex_joel3d polySurface92
+    100088: Trex_Geometry_Trex_joel3d polySurface93
+    100090: Trex_Geometry_Trex_joel3d polySurface94
+    100092: Trex_Geometry_Trex_joel3d R_Ankle
+    100094: Trex_Geometry_Trex_joel3d R_Blade
+    100096: Trex_Geometry_Trex_joel3d R_Hip
+    100098: Trex_Geometry_Trex_joel3d R_Knee
+    100100: Trex_Geometry_Trex_joel3d ribs
+    100102: Trex_Geometry_Trex_joel3d skull
+    100104: Trex_Geometry_Trex_joel3d tail
+    100106: TrexSkeletontoes_Trex_Geometry Trex_joel3d polySurface114
+    100108: TrexSkeletontoes_Trex_Geometry Trex_joel3d polySurface115
+    100110: TrexSkeletontoes_Trex_Geometry Trex_joel3d polySurface116
+    100112: TrexSkeletontoes_Trex_Geometry Trex_joel3d polySurface122
+    100114: TrexSkeletontoes_Trex_Geometry Trex_joel3d polySurface123
+    400000: //RootNode
+    400002: polySurface121_TrexSkeletontoes Trex_Geometry Trex_joel3d
+    400004: Trex_Geometry_Trex_joel3d jaw
+    400006: Trex_Geometry_Trex_joel3d L_Ankle
+    400008: Trex_Geometry_Trex_joel3d L_blade
+    400010: Trex_Geometry_Trex_joel3d L_Hip
+    400012: Trex_Geometry_Trex_joel3d L_Knee
+    400014: Trex_Geometry_Trex_joel3d neck1
+    400016: Trex_Geometry_Trex_joel3d pelvis
+    400018: Trex_Geometry_Trex_joel3d polySurface100
+    400020: Trex_Geometry_Trex_joel3d polySurface101
+    400022: Trex_Geometry_Trex_joel3d polySurface102
+    400024: Trex_Geometry_Trex_joel3d polySurface103
+    400026: Trex_Geometry_Trex_joel3d polySurface104
+    400028: Trex_Geometry_Trex_joel3d polySurface105
+    400030: Trex_Geometry_Trex_joel3d polySurface111
+    400032: Trex_Geometry_Trex_joel3d polySurface112
+    400034: Trex_Geometry_Trex_joel3d polySurface113
+    400036: Trex_Geometry_Trex_joel3d polySurface118
+    400038: Trex_Geometry_Trex_joel3d polySurface119
+    400040: Trex_Geometry_Trex_joel3d polySurface120
+    400042: Trex_Geometry_Trex_joel3d polySurface18
+    400044: Trex_Geometry_Trex_joel3d polySurface181
+    400046: Trex_Geometry_Trex_joel3d polySurface182
+    400048: Trex_Geometry_Trex_joel3d polySurface183
+    400050: Trex_Geometry_Trex_joel3d polySurface184
+    400052: Trex_Geometry_Trex_joel3d polySurface185
+    400054: Trex_Geometry_Trex_joel3d polySurface186
+    400056: Trex_Geometry_Trex_joel3d polySurface187
+    400058: Trex_Geometry_Trex_joel3d polySurface188
+    400060: Trex_Geometry_Trex_joel3d polySurface189
+    400062: Trex_Geometry_Trex_joel3d polySurface190
+    400064: Trex_Geometry_Trex_joel3d polySurface191
+    400066: Trex_Geometry_Trex_joel3d polySurface192
+    400068: Trex_Geometry_Trex_joel3d polySurface193
+    400070: Trex_Geometry_Trex_joel3d polySurface194
+    400072: Trex_Geometry_Trex_joel3d polySurface195
+    400074: Trex_Geometry_Trex_joel3d polySurface196
+    400076: Trex_Geometry_Trex_joel3d polySurface197
+    400078: Trex_Geometry_Trex_joel3d polySurface198
+    400080: Trex_Geometry_Trex_joel3d polySurface89
+    400082: Trex_Geometry_Trex_joel3d polySurface90
+    400084: Trex_Geometry_Trex_joel3d polySurface91
+    400086: Trex_Geometry_Trex_joel3d polySurface92
+    400088: Trex_Geometry_Trex_joel3d polySurface93
+    400090: Trex_Geometry_Trex_joel3d polySurface94
+    400092: Trex_Geometry_Trex_joel3d R_Ankle
+    400094: Trex_Geometry_Trex_joel3d R_Blade
+    400096: Trex_Geometry_Trex_joel3d R_Hip
+    400098: Trex_Geometry_Trex_joel3d R_Knee
+    400100: Trex_Geometry_Trex_joel3d ribs
+    400102: Trex_Geometry_Trex_joel3d skull
+    400104: Trex_Geometry_Trex_joel3d tail
+    400106: TrexSkeletontoes_Trex_Geometry Trex_joel3d polySurface114
+    400108: TrexSkeletontoes_Trex_Geometry Trex_joel3d polySurface115
+    400110: TrexSkeletontoes_Trex_Geometry Trex_joel3d polySurface116
+    400112: TrexSkeletontoes_Trex_Geometry Trex_joel3d polySurface122
+    400114: TrexSkeletontoes_Trex_Geometry Trex_joel3d polySurface123
+    2300000: polySurface121_TrexSkeletontoes Trex_Geometry Trex_joel3d
+    2300002: Trex_Geometry_Trex_joel3d jaw
+    2300004: Trex_Geometry_Trex_joel3d L_Ankle
+    2300006: Trex_Geometry_Trex_joel3d L_blade
+    2300008: Trex_Geometry_Trex_joel3d L_Hip
+    2300010: Trex_Geometry_Trex_joel3d L_Knee
+    2300012: Trex_Geometry_Trex_joel3d neck1
+    2300014: Trex_Geometry_Trex_joel3d pelvis
+    2300016: Trex_Geometry_Trex_joel3d polySurface100
+    2300018: Trex_Geometry_Trex_joel3d polySurface101
+    2300020: Trex_Geometry_Trex_joel3d polySurface102
+    2300022: Trex_Geometry_Trex_joel3d polySurface103
+    2300024: Trex_Geometry_Trex_joel3d polySurface104
+    2300026: Trex_Geometry_Trex_joel3d polySurface105
+    2300028: Trex_Geometry_Trex_joel3d polySurface111
+    2300030: Trex_Geometry_Trex_joel3d polySurface112
+    2300032: Trex_Geometry_Trex_joel3d polySurface113
+    2300034: Trex_Geometry_Trex_joel3d polySurface118
+    2300036: Trex_Geometry_Trex_joel3d polySurface119
+    2300038: Trex_Geometry_Trex_joel3d polySurface120
+    2300040: Trex_Geometry_Trex_joel3d polySurface18
+    2300042: Trex_Geometry_Trex_joel3d polySurface181
+    2300044: Trex_Geometry_Trex_joel3d polySurface182
+    2300046: Trex_Geometry_Trex_joel3d polySurface183
+    2300048: Trex_Geometry_Trex_joel3d polySurface184
+    2300050: Trex_Geometry_Trex_joel3d polySurface185
+    2300052: Trex_Geometry_Trex_joel3d polySurface186
+    2300054: Trex_Geometry_Trex_joel3d polySurface187
+    2300056: Trex_Geometry_Trex_joel3d polySurface188
+    2300058: Trex_Geometry_Trex_joel3d polySurface189
+    2300060: Trex_Geometry_Trex_joel3d polySurface190
+    2300062: Trex_Geometry_Trex_joel3d polySurface191
+    2300064: Trex_Geometry_Trex_joel3d polySurface192
+    2300066: Trex_Geometry_Trex_joel3d polySurface193
+    2300068: Trex_Geometry_Trex_joel3d polySurface194
+    2300070: Trex_Geometry_Trex_joel3d polySurface195
+    2300072: Trex_Geometry_Trex_joel3d polySurface196
+    2300074: Trex_Geometry_Trex_joel3d polySurface197
+    2300076: Trex_Geometry_Trex_joel3d polySurface198
+    2300078: Trex_Geometry_Trex_joel3d polySurface89
+    2300080: Trex_Geometry_Trex_joel3d polySurface90
+    2300082: Trex_Geometry_Trex_joel3d polySurface91
+    2300084: Trex_Geometry_Trex_joel3d polySurface92
+    2300086: Trex_Geometry_Trex_joel3d polySurface93
+    2300088: Trex_Geometry_Trex_joel3d polySurface94
+    2300090: Trex_Geometry_Trex_joel3d R_Ankle
+    2300092: Trex_Geometry_Trex_joel3d R_Blade
+    2300094: Trex_Geometry_Trex_joel3d R_Hip
+    2300096: Trex_Geometry_Trex_joel3d R_Knee
+    2300098: Trex_Geometry_Trex_joel3d ribs
+    2300100: Trex_Geometry_Trex_joel3d skull
+    2300102: Trex_Geometry_Trex_joel3d tail
+    2300104: TrexSkeletontoes_Trex_Geometry Trex_joel3d polySurface114
+    2300106: TrexSkeletontoes_Trex_Geometry Trex_joel3d polySurface115
+    2300108: TrexSkeletontoes_Trex_Geometry Trex_joel3d polySurface116
+    2300110: TrexSkeletontoes_Trex_Geometry Trex_joel3d polySurface122
+    2300112: TrexSkeletontoes_Trex_Geometry Trex_joel3d polySurface123
+    3300000: polySurface121_TrexSkeletontoes Trex_Geometry Trex_joel3d
+    3300002: Trex_Geometry_Trex_joel3d jaw
+    3300004: Trex_Geometry_Trex_joel3d L_Ankle
+    3300006: Trex_Geometry_Trex_joel3d L_blade
+    3300008: Trex_Geometry_Trex_joel3d L_Hip
+    3300010: Trex_Geometry_Trex_joel3d L_Knee
+    3300012: Trex_Geometry_Trex_joel3d neck1
+    3300014: Trex_Geometry_Trex_joel3d pelvis
+    3300016: Trex_Geometry_Trex_joel3d polySurface100
+    3300018: Trex_Geometry_Trex_joel3d polySurface101
+    3300020: Trex_Geometry_Trex_joel3d polySurface102
+    3300022: Trex_Geometry_Trex_joel3d polySurface103
+    3300024: Trex_Geometry_Trex_joel3d polySurface104
+    3300026: Trex_Geometry_Trex_joel3d polySurface105
+    3300028: Trex_Geometry_Trex_joel3d polySurface111
+    3300030: Trex_Geometry_Trex_joel3d polySurface112
+    3300032: Trex_Geometry_Trex_joel3d polySurface113
+    3300034: Trex_Geometry_Trex_joel3d polySurface118
+    3300036: Trex_Geometry_Trex_joel3d polySurface119
+    3300038: Trex_Geometry_Trex_joel3d polySurface120
+    3300040: Trex_Geometry_Trex_joel3d polySurface18
+    3300042: Trex_Geometry_Trex_joel3d polySurface181
+    3300044: Trex_Geometry_Trex_joel3d polySurface182
+    3300046: Trex_Geometry_Trex_joel3d polySurface183
+    3300048: Trex_Geometry_Trex_joel3d polySurface184
+    3300050: Trex_Geometry_Trex_joel3d polySurface185
+    3300052: Trex_Geometry_Trex_joel3d polySurface186
+    3300054: Trex_Geometry_Trex_joel3d polySurface187
+    3300056: Trex_Geometry_Trex_joel3d polySurface188
+    3300058: Trex_Geometry_Trex_joel3d polySurface189
+    3300060: Trex_Geometry_Trex_joel3d polySurface190
+    3300062: Trex_Geometry_Trex_joel3d polySurface191
+    3300064: Trex_Geometry_Trex_joel3d polySurface192
+    3300066: Trex_Geometry_Trex_joel3d polySurface193
+    3300068: Trex_Geometry_Trex_joel3d polySurface194
+    3300070: Trex_Geometry_Trex_joel3d polySurface195
+    3300072: Trex_Geometry_Trex_joel3d polySurface196
+    3300074: Trex_Geometry_Trex_joel3d polySurface197
+    3300076: Trex_Geometry_Trex_joel3d polySurface198
+    3300078: Trex_Geometry_Trex_joel3d polySurface89
+    3300080: Trex_Geometry_Trex_joel3d polySurface90
+    3300082: Trex_Geometry_Trex_joel3d polySurface91
+    3300084: Trex_Geometry_Trex_joel3d polySurface92
+    3300086: Trex_Geometry_Trex_joel3d polySurface93
+    3300088: Trex_Geometry_Trex_joel3d polySurface94
+    3300090: Trex_Geometry_Trex_joel3d R_Ankle
+    3300092: Trex_Geometry_Trex_joel3d R_Blade
+    3300094: Trex_Geometry_Trex_joel3d R_Hip
+    3300096: Trex_Geometry_Trex_joel3d R_Knee
+    3300098: Trex_Geometry_Trex_joel3d ribs
+    3300100: Trex_Geometry_Trex_joel3d skull
+    3300102: Trex_Geometry_Trex_joel3d tail
+    3300104: TrexSkeletontoes_Trex_Geometry Trex_joel3d polySurface114
+    3300106: TrexSkeletontoes_Trex_Geometry Trex_joel3d polySurface115
+    3300108: TrexSkeletontoes_Trex_Geometry Trex_joel3d polySurface116
+    3300110: TrexSkeletontoes_Trex_Geometry Trex_joel3d polySurface122
+    3300112: TrexSkeletontoes_Trex_Geometry Trex_joel3d polySurface123
+    4300000: polySurface121_TrexSkeletontoes Trex_Geometry Trex_joel3d
+    4300002: Trex_Geometry_Trex_joel3d jaw
+    4300004: Trex_Geometry_Trex_joel3d L_Ankle
+    4300006: Trex_Geometry_Trex_joel3d L_blade
+    4300008: Trex_Geometry_Trex_joel3d L_Hip
+    4300010: Trex_Geometry_Trex_joel3d L_Knee
+    4300012: Trex_Geometry_Trex_joel3d neck1
+    4300014: Trex_Geometry_Trex_joel3d pelvis
+    4300016: Trex_Geometry_Trex_joel3d polySurface100
+    4300018: Trex_Geometry_Trex_joel3d polySurface101
+    4300020: Trex_Geometry_Trex_joel3d polySurface102
+    4300022: Trex_Geometry_Trex_joel3d polySurface103
+    4300024: Trex_Geometry_Trex_joel3d polySurface104
+    4300026: Trex_Geometry_Trex_joel3d polySurface105
+    4300028: Trex_Geometry_Trex_joel3d polySurface111
+    4300030: Trex_Geometry_Trex_joel3d polySurface112
+    4300032: Trex_Geometry_Trex_joel3d polySurface113
+    4300034: Trex_Geometry_Trex_joel3d polySurface118
+    4300036: Trex_Geometry_Trex_joel3d polySurface119
+    4300038: Trex_Geometry_Trex_joel3d polySurface120
+    4300040: Trex_Geometry_Trex_joel3d polySurface18
+    4300042: Trex_Geometry_Trex_joel3d polySurface181
+    4300044: Trex_Geometry_Trex_joel3d polySurface182
+    4300046: Trex_Geometry_Trex_joel3d polySurface183
+    4300048: Trex_Geometry_Trex_joel3d polySurface184
+    4300050: Trex_Geometry_Trex_joel3d polySurface185
+    4300052: Trex_Geometry_Trex_joel3d polySurface186
+    4300054: Trex_Geometry_Trex_joel3d polySurface187
+    4300056: Trex_Geometry_Trex_joel3d polySurface188
+    4300058: Trex_Geometry_Trex_joel3d polySurface189
+    4300060: Trex_Geometry_Trex_joel3d polySurface190
+    4300062: Trex_Geometry_Trex_joel3d polySurface191
+    4300064: Trex_Geometry_Trex_joel3d polySurface192
+    4300066: Trex_Geometry_Trex_joel3d polySurface193
+    4300068: Trex_Geometry_Trex_joel3d polySurface194
+    4300070: Trex_Geometry_Trex_joel3d polySurface195
+    4300072: Trex_Geometry_Trex_joel3d polySurface196
+    4300074: Trex_Geometry_Trex_joel3d polySurface197
+    4300076: Trex_Geometry_Trex_joel3d polySurface198
+    4300078: Trex_Geometry_Trex_joel3d polySurface89
+    4300080: Trex_Geometry_Trex_joel3d polySurface90
+    4300082: Trex_Geometry_Trex_joel3d polySurface91
+    4300084: Trex_Geometry_Trex_joel3d polySurface92
+    4300086: Trex_Geometry_Trex_joel3d polySurface93
+    4300088: Trex_Geometry_Trex_joel3d polySurface94
+    4300090: Trex_Geometry_Trex_joel3d R_Ankle
+    4300092: Trex_Geometry_Trex_joel3d R_Blade
+    4300094: Trex_Geometry_Trex_joel3d R_Hip
+    4300096: Trex_Geometry_Trex_joel3d R_Knee
+    4300098: Trex_Geometry_Trex_joel3d ribs
+    4300100: Trex_Geometry_Trex_joel3d skull
+    4300102: Trex_Geometry_Trex_joel3d tail
+    4300104: TrexSkeletontoes_Trex_Geometry Trex_joel3d polySurface114
+    4300106: TrexSkeletontoes_Trex_Geometry Trex_joel3d polySurface115
+    4300108: TrexSkeletontoes_Trex_Geometry Trex_joel3d polySurface116
+    4300110: TrexSkeletontoes_Trex_Geometry Trex_joel3d polySurface122
+    4300112: TrexSkeletontoes_Trex_Geometry Trex_joel3d polySurface123
+    9500000: //RootNode
+  materials:
+    importMaterials: 1
+    materialName: 0
+    materialSearch: 1
+  animations:
+    legacyGenerateAnimations: 4
+    bakeSimulation: 0
+    optimizeGameObjects: 0
+    animationCompression: 1
+    animationRotationError: .5
+    animationPositionError: .5
+    animationScaleError: .5
+    animationWrapMode: 0
+    extraExposedTransformPaths: []
+    clipAnimations: []
+    isReadable: 0
+  meshes:
+    lODScreenPercentages: []
+    globalScale: 1
+    meshCompression: 3
+    addColliders: 0
+    importBlendShapes: 1
+    swapUVChannels: 0
+    generateSecondaryUV: 0
+    useFileUnits: 1
+    optimizeMeshForGPU: 1
+    weldVertices: 1
+    secondaryUVAngleDistortion: 8
+    secondaryUVAreaDistortion: 15.000001
+    secondaryUVHardAngle: 88
+    secondaryUVPackMargin: 4
+  tangentSpace:
+    normalSmoothAngle: 60
+    splitTangentsAcrossUV: 1
+    normalImportMode: 1
+    tangentImportMode: 1
+  importAnimation: 1
+  copyAvatar: 0
+  humanDescription:
+    human: []
+    skeleton: []
+    armTwist: .5
+    foreArmTwist: .5
+    upperLegTwist: .5
+    legTwist: .5
+    armStretch: .0500000007
+    legStretch: .0500000007
+    feetSpacing: 0
+    rootMotionBoneName: 
+  lastHumanDescriptionAvatarSource: {instanceID: 0}
+  animationType: 0
+  additionalBone: 0
+  userData: 
